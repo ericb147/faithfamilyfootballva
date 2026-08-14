@@ -19,19 +19,39 @@ import "../styles/global.css";
       class="sticky top-0 z-50 border-b border-red-600/20 bg-[#050505]/95 backdrop-blur"
     >
       <div
-        class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8"
+        class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8"
       >
         <a
           href="#top"
-          class="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.3em] text-white"
+          class="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.2em] text-white sm:tracking-[0.3em]"
         >
           <img
             src="/FFF.png"
             alt="Faith Family Football logo"
-            class="h-15 w-15 rounded-full object-cover"
+            class="h-12 w-12 rounded-full object-cover sm:h-15 sm:w-15"
           />
-          <span>Faith Family Football</span>
+          <span class="text-xs sm:text-sm">Faith Family Football</span>
         </a>
+
+        <details class="relative md:hidden">
+          <summary
+            class="list-none cursor-pointer rounded-full border border-white/15 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white transition hover:bg-white/10"
+          >
+            Menu
+          </summary>
+          <nav
+            class="absolute right-0 top-full mt-3 w-52 rounded-2xl border border-red-500/20 bg-[#0a0a0a] p-3 shadow-2xl"
+          >
+            <div class="flex flex-col gap-2 text-sm font-medium text-white/80">
+              <a href="#about" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">About</a>
+              <a href="#build" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">Build</a>
+              <a href="#coach" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">Coach</a>
+              <a href="#contact" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">Contact</a>
+              <a href="#sponsors" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">Sponsors</a>
+            </div>
+          </nav>
+        </details>
+
         <nav class="hidden gap-6 text-sm font-medium text-white/75 md:flex">
           <a href="#about" class="transition hover:text-red-500">About</a>
           <a href="#build" class="transition hover:text-red-500">Build</a>
@@ -41,6 +61,18 @@ import "../styles/global.css";
         </nav>
       </div>
     </header>
+
+    <script>
+      document.addEventListener("click", (event) => {
+        const openDetails = document.querySelectorAll("details[open]");
+
+        openDetails.forEach((details) => {
+          if (!details.contains(event.target)) {
+            details.removeAttribute("open");
+          }
+        });
+      });
+    </script>
 
     <main id="top">
       <section class="relative isolate overflow-hidden bg-[#050505] text-white">
