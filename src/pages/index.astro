@@ -44,7 +44,7 @@ import "../styles/global.css";
           >
             <div class="flex flex-col gap-2 text-sm font-medium text-white/80">
               <a href="#about" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">About</a>
-              <a href="#build" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">Build</a>
+              <a href="#build" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">2026 Theme</a>
               <a href="#coach" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">Coach</a>
               <a href="#contact" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">Contact</a>
               <a href="#sponsors" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">Sponsors</a>
@@ -54,7 +54,7 @@ import "../styles/global.css";
 
         <nav class="hidden gap-6 text-sm font-medium text-white/75 md:flex">
           <a href="#about" class="transition hover:text-red-500">About</a>
-          <a href="#build" class="transition hover:text-red-500">Build</a>
+          <a href="#build" class="transition hover:text-red-500">2026 Theme</a>
           <a href="#coach" class="transition hover:text-red-500">Coach</a>
           <a href="#contact" class="transition hover:text-red-500">Contact</a>
           <a href="#sponsors" class="transition hover:text-red-500">Sponsors</a>
@@ -67,7 +67,7 @@ import "../styles/global.css";
         const openDetails = document.querySelectorAll("details[open]");
 
         openDetails.forEach((details) => {
-          if (!details.contains(event.target)) {
+          if (!details.contains(event.target as Node)) {
             details.removeAttribute("open");
           }
         });
@@ -98,12 +98,12 @@ import "../styles/global.css";
               </div>
 
               <p class="mb-4 text-sm font-semibold uppercase tracking-[0.35em] text-red-500">
-                Southwest Virginia ministry • youth leadership
+                Southwest Virginia • youth leadership
               </p>
 
-              <h1 class="text-5xl font-black uppercase leading-none tracking-tight text-white sm:text-6xl lg:text-7xl">
+              <!-- <h1 class="text-5xl font-black uppercase leading-none tracking-tight text-white sm:text-6xl lg:text-7xl">
                 Faith!<br /> Family!<br /> Football!
-              </h1>
+              </h1> -->
 
               <p class="mt-6 max-w-xl text-lg leading-8 text-slate-200 sm:text-xl">
                 Building character, faith, and community on and off the field
