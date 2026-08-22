@@ -1,5 +1,33 @@
 ---
 import "../styles/global.css";
+
+const galleryImages = [
+  {
+    src: "/gallery/75148285742__F1525C8E-045A-4956-BB72-D6C973D45E31 - Copy.jpeg",
+    alt: "Faith Family Football team photo",
+    caption: "Team unity on and off the field",
+  },
+  {
+    src: "/gallery/huddle1 - Copy.jpeg",
+    alt: "Players in a football huddle",
+    caption: "Focused on the next play",
+  },
+  {
+    src: "/gallery/huddle2 - Copy.jpeg",
+    alt: "Football team huddle with coach",
+    caption: "Leadership and encouragement",
+  },
+  {
+    src: "/gallery/huddle3 - Copy.jpeg",
+    alt: "Team gathering before practice",
+    caption: "Preparing together for the season",
+  },
+  {
+    src: "/gallery/kneeling - Copy.jpeg",
+    alt: "Players kneeling in prayer",
+    caption: "Faith rooted in team culture",
+  },
+];
 ---
 
 <html lang="en">
@@ -16,7 +44,7 @@ import "../styles/global.css";
   </head>
   <body class="bg-[#f5f5f5] text-slate-900">
     <header
-      class="sticky top-0 z-50 border-b border-red-600/20 bg-[#050505]/95 backdrop-blur"
+      class="sticky top-0 z-50 border-b border-red-600/20 bg-black/95 backdrop-blur"
     >
       <div
         class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8"
@@ -44,7 +72,8 @@ import "../styles/global.css";
           >
             <div class="flex flex-col gap-2 text-sm font-medium text-white/80">
               <a href="#about" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">About</a>
-              <a href="#theme" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">2026 Theme</a>
+              <a href="#gallery" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">Gallery</a>
+              <a href="#theme" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">2026 Theme</a>              
               <a href="#coach" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">Coach</a>
               <a href="#contact" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">Contact</a>
               <a href="#sponsors" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">Sponsors</a>
@@ -54,8 +83,9 @@ import "../styles/global.css";
 
         <nav class="hidden gap-6 text-sm font-medium text-white/75 md:flex">
           <a href="#about" class="transition hover:text-red-500">About</a>
+          <a href="#gallery" class="transition hover:text-red-500">Gallery</a>
           <a href="#theme" class="transition hover:text-red-500">2026 Theme</a>
-          <a href="#coach" class="transition hover:text-red-500">Coach</a>
+          <a href="#coach" class="transition hover:text-red-500">Coach</a>          
           <a href="#contact" class="transition hover:text-red-500">Contact</a>
           <a href="#sponsors" class="transition hover:text-red-500">Sponsors</a>
         </nav>
@@ -72,10 +102,42 @@ import "../styles/global.css";
           }
         });
       });
+
+      const gallerySlides = Array.from(document.querySelectorAll<HTMLElement>("[data-gallery-slide]"));
+      const galleryThumbs = Array.from(document.querySelectorAll<HTMLElement>("[data-gallery-thumb]"));
+      let galleryIndex = 0;
+
+      const updateGallery = (nextIndex: number) => {
+        galleryIndex = (nextIndex + gallerySlides.length) % gallerySlides.length;
+
+        gallerySlides.forEach((slide, index) => {
+          const active = index === galleryIndex;
+          slide.classList.toggle("opacity-100", active);
+          slide.classList.toggle("opacity-0", !active);
+          slide.setAttribute("aria-hidden", String(!active));
+        });
+
+        galleryThumbs.forEach((thumb, index) => {
+          const active = index === galleryIndex;
+          thumb.classList.toggle("ring-2", active);
+          thumb.classList.toggle("ring-red-500", active);
+          thumb.classList.toggle("ring-offset-2", active);
+          thumb.classList.toggle("ring-offset-slate-50", active);
+          thumb.setAttribute("aria-pressed", String(active));
+        });
+      };
+
+      if (gallerySlides.length > 0) {
+        galleryThumbs.forEach((thumb: HTMLElement) => {
+          thumb.addEventListener("click", () => updateGallery(Number(thumb.dataset.index)));
+        });
+
+        setInterval(() => updateGallery(galleryIndex + 1), 4000);
+      }
     </script>
 
     <main id="top">
-      <section class="relative isolate overflow-hidden bg-[#050505] text-white">
+      <section class="relative isolate overflow-hidden bg-black text-white">
         <div class="absolute inset-0 -z-10">
           <img
             src="/huddle3-crop.jpeg"
@@ -83,11 +145,11 @@ import "../styles/global.css";
             class="h-full w-full scale-110 object-cover object-center brightness-60 contrast-110 saturate-75"
           />
           <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(220,38,38,0.18),transparent_28%)]"></div>
-          <div class="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/85 via-[58%] to-[#050505]/15"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-black via-black/85 via-[58%] to-black/15"></div>
         </div>
 
         <div class="mx-auto grid min-h-[82vh] max-w-7xl lg:grid-cols-[0.95fr_1.05fr]">
-          <div class="relative z-10 flex items-center justify-center bg-[#050505]/90 px-6 py-16 sm:px-10 lg:px-12 lg:py-20 lg:bg-[#050505]">
+          <div class="relative z-10 flex items-center justify-center bg-black/90 px-6 py-16 sm:px-10 lg:px-12 lg:py-20 lg:bg-black">
             <div class="w-full max-w-xl">
               <div class="mb-8 w-full">
                 <img
@@ -159,10 +221,66 @@ import "../styles/global.css";
         </div>
       </section>
 
-      <section id="theme" class="relative overflow-hidden bg-slate-950 py-20 text-white">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(200,16,46,0.22),_transparent_45%)]"></div>
+      <section id="gallery" class="bg-[#f5f5f5] py-20 text-slate-900">
+        <div class="mx-auto max-w-6xl px-6 lg:px-8">
+          <div class="mb-10 text-center">
+            <p class="text-sm font-semibold uppercase tracking-[0.35em] text-red-700">
+              Gallery
+            </p>
+          </div>
+
+          <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+            <div class="relative overflow-hidden rounded-[1.5rem] bg-slate-100">
+              <div class="relative h-[540px] w-full sm:h-[620px]">
+                {galleryImages.map((image, index) => (
+                  <div
+                    data-gallery-slide
+                    aria-hidden={index !== 0}
+                    class={`absolute inset-0 flex items-center justify-center p-4 transition-opacity duration-700 ${
+                      index === 0 ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      class="max-h-full max-w-full rounded-[1.25rem] object-contain object-center shadow-lg shadow-slate-300/40"
+                    />
+                  </div>
+                ))}
+
+              </div>
+            </div>
+
+            <div class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-5">
+              {galleryImages.map((image, index) => (
+                <button
+                  type="button"
+                  aria-label={`Show gallery image ${index + 1}`}
+                  aria-pressed={index === 0}
+                  data-gallery-thumb
+                  data-index={index}
+                  class={`overflow-hidden rounded-xl border transition-all duration-200 ${
+                    index === 0
+                      ? "border-red-500 ring-2 ring-red-500 ring-offset-2 ring-offset-slate-50"
+                      : "border-slate-200 hover:border-slate-300"
+                  }`}
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    class="h-20 w-full object-cover object-center sm:h-24"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="theme" class="relative overflow-hidden bg-black py-20 text-white">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(200,16,46,0.18),_transparent_45%)]"></div>
         <div class="relative mx-auto max-w-6xl px-6 lg:px-8">
-          <div class="rounded-[2rem] border border-yellow-500/30 bg-slate-950/75 p-8 shadow-2xl backdrop-blur-sm sm:p-12 lg:p-16">
+          <div class="rounded-[2rem] border border-red-500/20 bg-black p-8 shadow-2xl sm:p-12 lg:p-16">
             <div class="max-w-4xl">
               <p class="text-3xl font-semibold uppercase tracking-[0.3em] text-red-500">
                 2026 Season Theme
@@ -245,11 +363,12 @@ import "../styles/global.css";
           </div>
         </div>
       </section>
+
     </main>
 
     <footer
       id="contact"
-      class="border-t border-slate-200 bg-slate-950 py-16 text-white"
+      class="border-t border-red-600/20 bg-black py-16 text-white"
     >
       <div
         class="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[1fr_0.8fr] lg:px-8"
@@ -305,7 +424,7 @@ import "../styles/global.css";
               <img
                 src="/new-peoples-logo.svg"
                 alt="New Peoples Bank logo"
-                class="max-h-24 w-full max-w-md object-contain"
+                class="max-h-36 w-full max-w-lg object-contain"
               />
             </div>
 
@@ -318,14 +437,14 @@ import "../styles/global.css";
                   <img
                     src="/JennyMaeFitness-3.avif"
                     alt="Jenny Mae Fitness logo"
-                    class="max-h-24 w-full object-contain"
+                    class="max-h-32 w-full max-w-[220px] object-contain"
                   />
                 </div>
                 <div class="flex min-h-32 items-center justify-center rounded-2xl bg-slate-100 p-5">
                   <img
                     src="/theanchor.png"
                     alt="The Anchor logo"
-                    class="max-h-24 w-full object-contain"
+                    class="max-h-32 w-full max-w-[220px] object-contain"
                   />
                 </div>
               </div>
