@@ -170,7 +170,7 @@ const galleryImages = [
         class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8"
       >
         <a
-          href="#top"
+          href="/"
           class="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.2em] text-white sm:tracking-[0.3em]"
         >
           <img
@@ -198,6 +198,7 @@ const galleryImages = [
               <a href="#gallery" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">Gallery</a>
               <a href="#contact" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">Contact</a>
               <a href="#sponsors" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">Sponsors</a>
+              <a href="#donate" class="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-500">Donate</a>
             </div>
           </nav>
         </details>
@@ -210,11 +211,48 @@ const galleryImages = [
           <a href="#gallery" class="transition hover:text-red-500">Gallery</a>     
           <a href="#contact" class="transition hover:text-red-500">Contact</a>
           <a href="#sponsors" class="transition hover:text-red-500">Sponsors</a>
+          <a href="#donate" class="transition hover:text-red-500">Donate</a>
         </nav>
       </div>
     </header>
 
     <script>
+      const samePageHashLinks = Array.from(
+        document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]'),
+      );
+
+      const clearSectionHash = () => {
+        history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+      };
+
+      samePageHashLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+          const href = link.getAttribute("href");
+          if (!href || href === "#") {
+            return;
+          }
+
+          const target = document.querySelector<HTMLElement>(href);
+          if (!target) {
+            return;
+          }
+
+          event.preventDefault();
+          clearSectionHash();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      if (window.location.hash) {
+        const initialTarget = document.querySelector<HTMLElement>(window.location.hash);
+        if (initialTarget) {
+          clearSectionHash();
+          requestAnimationFrame(() => {
+            window.scrollTo({ top: 0, behavior: "auto" });
+          });
+        }
+      }
+
       document.addEventListener("click", (event) => {
         const openDetails = document.querySelectorAll("details[open]");
 
